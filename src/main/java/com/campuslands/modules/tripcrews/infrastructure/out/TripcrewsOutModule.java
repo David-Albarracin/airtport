@@ -52,7 +52,7 @@ public class TripcrewsOutModule {
         option.add(new JMenuItem(new AbstractAction("Buscar  tripulante") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // adapter.VFindAirportAll();
+                tripcrewsAdapter.findByIdTripCrews();
             }
         }));
 
@@ -65,4 +65,6 @@ public class TripcrewsOutModule {
 
         return option;
     }
+
+    
 }

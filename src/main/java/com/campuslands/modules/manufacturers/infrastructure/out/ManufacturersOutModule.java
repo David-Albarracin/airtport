@@ -1,13 +1,17 @@
 package com.campuslands.modules.manufacturers.infrastructure.out;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.campuslands.modules.manufacturers.application.ManufacturersService;
+import com.campuslands.modules.manufacturers.domain.models.Manufacturers;
 import com.campuslands.modules.manufacturers.infrastructure.in.ManufacturersAdapter;
+
 
 public class ManufacturersOutModule {
 
@@ -65,5 +69,17 @@ public class ManufacturersOutModule {
         }));
 
         return option;
+    }
+
+    public List<String> selectOptions() {
+        List<String> optionsMap = new ArrayList<String>();
+
+        List<Manufacturers> all = manufacturersService.getAllManufacturers();
+
+        for (Manufacturers item : all) {
+            optionsMap.add(item.getId() + " " + item.getName());
+        }
+
+        return optionsMap;
     }
 }

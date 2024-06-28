@@ -1,7 +1,8 @@
 package com.campuslands.modules.tripcrews.infrastructure.in;
 
 import com.campuslands.modules.tripcrews.domain.models.Tripcrews;
-
+import com.campuslands.modules.employees.infrastructure.out.EmployeesOutModule;
+import com.campuslands.modules.flightconnections.infrastructure.out.FlightConnectionsOutModule;
 import com.campuslands.modules.tripcrews.application.TripcrewsService; // Asegúrate de importar el servicio correcto
 import com.campuslands.views.infrastructure.out.ViewOut;
 
@@ -15,22 +16,28 @@ public class TripcrewsAdapter {
     private ViewOut v;
     private final TripcrewsService tripcrewsService;
 
+    EmployeesOutModule employeesOutModule;
+    FlightConnectionsOutModule flightConnectionsOutModule;
+
     public TripcrewsAdapter(TripcrewsService tripcrewsService) {
         this.tripcrewsService = tripcrewsService;
+        this.employeesOutModule = new EmployeesOutModule();
+        this.flightConnectionsOutModule = new FlightConnectionsOutModule();
+
     }
 
     public void createTripcrew() {
         v = new ViewOut();
-        ViewOut.VInput idEmployeesInput = v.new VInput("Ingresa el ID del Empleado", 30);
-        ViewOut.VInput idConnectionInput = v.new VInput("Ingresa el ID de la Conexión", 30);
+        ViewOut.VSelect idEmployeesInput = v.new VSelect("Ingresa el ID del Empleado", employeesOutModule.selectOptions());
+        ViewOut.VSelect idConnectionInput = v.new VSelect("Ingresa el ID de la Conexión", flightConnectionsOutModule.selectOptions());
 
         JButton addButton = new JButton("Agregar Tripcrew");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int idEmployees = idEmployeesInput.getInt();
-                    int idConnection = idConnectionInput.getInt();
+                    int idEmployees = Integer.parseInt(idEmployeesInput.getValue());
+                    int idConnection = Integer.parseInt(idConnectionInput.getValue());
                     Tripcrews tripcrew = new Tripcrews(idEmployees, idConnection);
                     tripcrewsService.createTripcrew(tripcrew);
 
@@ -50,16 +57,16 @@ public class TripcrewsAdapter {
 
     public void updateTripcrew() {
         v = new ViewOut();
-        ViewOut.VInput idEmployeesInput = v.new VInput("Ingresa el ID del Empleado", 30);
-        ViewOut.VInput idConnectionInput = v.new VInput("Ingresa el ID de la Conexión", 30);
+        ViewOut.VSelect idEmployeesInput = v.new VSelect("Ingresa el ID del Empleado", employeesOutModule.selectOptions());
+        ViewOut.VSelect idConnectionInput = v.new VSelect("Ingresa el ID de la Conexión", flightConnectionsOutModule.selectOptions());
 
         JButton updateButton = new JButton("Actualizar Tripcrew");
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int idEmployees = idEmployeesInput.getInt();
-                    int idConnection = idConnectionInput.getInt();
+                    int idEmployees = Integer.parseInt(idEmployeesInput.getValue());
+                    int idConnection = Integer.parseInt(idConnectionInput.getValue());
 
                     Tripcrews tripcrew = new Tripcrews(idEmployees, idConnection);
                     tripcrewsService.updateTripcrew(tripcrew);

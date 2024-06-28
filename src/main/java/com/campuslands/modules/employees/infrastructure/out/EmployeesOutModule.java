@@ -1,12 +1,15 @@
 package com.campuslands.modules.employees.infrastructure.out;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.campuslands.modules.employees.application.EmployeesService;
+import com.campuslands.modules.employees.domain.models.Employee;
 import com.campuslands.modules.employees.infrastructure.in.EmployeesAdapter;
 
 public class EmployeesOutModule {
@@ -63,6 +66,18 @@ public class EmployeesOutModule {
         }));
 
         return option;
+    }
+
+    public List<String> selectOptions() {
+        List<String> optionsMap = new ArrayList<String>();
+
+        List<Employee> all = employeesService.getAllEmployees();
+
+        for (Employee item : all) {
+            optionsMap.add(item.getId() + " " + item.getName());
+        }
+
+        return optionsMap;
     }
 
 }

@@ -1,12 +1,16 @@
 package com.campuslands.modules.statuses.infrastructure.out;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+
 import com.campuslands.modules.statuses.application.StatusesService;
+import com.campuslands.modules.statuses.domain.models.Statuses;
 import com.campuslands.modules.statuses.infrastructure.in.StatusesAdapter;
 
 public class StatusesOutModule {
@@ -63,5 +67,17 @@ public class StatusesOutModule {
         }));
 
         return option;
+    }
+
+    public List<String> selectOptions() {
+        List<String> optionsMap = new ArrayList<String>();
+
+        List<Statuses> all = statusesService.getAllStatuses();
+
+        for (Statuses item : all) {
+            optionsMap.add(item.getId() + " " + item.getName());
+        }
+
+        return optionsMap;
     }
 }

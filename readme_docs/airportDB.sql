@@ -216,7 +216,7 @@ CREATE TABLE `flight_connections` (
   `connection_number` VARCHAR(255) DEFAULT NULL,
   `id_trip` INT DEFAULT NULL,
   `id_plane` INT DEFAULT NULL,
-  `type_fright` VARCHAR(255) DEFAULT NULL,
+  `type_flight` VARCHAR(255) DEFAULT NULL,
   `last_scale` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_trip_connection` (`id_trip`),
@@ -439,7 +439,7 @@ INSERT INTO planes (plateNumber, capacity, fabrication_date, id_status, id_model
 ('JKL012', 220, '2021-04-01', 4, 1), 
 ('MNO345', 250, '2022-05-01', 5, 1);
 
-INSERT INTO flight_connections (connection_number, id_trip, id_plane, type_fright, Last_Scale) VALUES 
+INSERT INTO flight_connections (connection_number, id_trip, id_plane, type_flight, last_scale) VALUES 
 ('FC123', 1, 1, 'Domestic', 'City A'), 
 ('FC456', 2, 2, 'International', 'City B'), 
 ('FC789', 3, 3, 'Domestic', 'City C'), 

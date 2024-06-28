@@ -113,7 +113,7 @@ public class EmployeesMySQL extends MySQL implements EmployeesRepository {
     public List<Employee> findAll() {
         List<Employee> employee = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id, name, email, paassword, idrol, ingressdate, idairline, idairport FROM employees";
+            String query = "SELECT id, name, email, password, idrol, ingressdate, idairline, idairport FROM employees";
             try (PreparedStatement statement = connection.prepareStatement(query);
                     ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
